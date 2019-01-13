@@ -1,0 +1,39 @@
+{
+  "name": "dismisura",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lorenzofar/dismisura.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lorenzofar/dismisura/issues"
+  },
+  "homepage": "https://github.com/lorenzofar/dismisura#readme",
+  "dependencies": {
+    "compression": "^1.7.3",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "knex": "^0.16.3",
+    "pug": "^2.0.3",
+    "serve-favicon": "^2.5.0",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/compression": "0.0.36",
+    "@types/cors": "^2.8.4",
+    "@types/express": "^4.16.0",
+    "@types/node": "^10.12.18",
+    "@types/serve-favicon": "^2.2.30",
+    "@types/socket.io": "^2.1.2"
+  }
+}
