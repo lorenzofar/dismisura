@@ -1,6 +1,8 @@
 import { Server } from "http";
 import * as socket_io from "socket.io";
 
+import * as Analyzer from "./analyzer";
+
 var io: socket_io.Server = null;
 
 export function initialize(server: Server) {
@@ -9,7 +11,5 @@ export function initialize(server: Server) {
 }
 
 function handleIncomingConnection(socket: socket_io.Socket) {
-    // A new client is connected to data streaming
-    // Send initial data
-    console.log("> uno stronzo si è connesso");
+    Analyzer.trackUserConnection(socket.client.id);
 }
