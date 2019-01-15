@@ -11,5 +11,9 @@ export function initialize(server: Server) {
 }
 
 function handleIncomingConnection(socket: socket_io.Socket) {
-    Analyzer.trackUserConnection(socket.client.id);
+    let clientId = socket.client.id;
+    Analyzer.trackUserConnection(clientId);
+    socket.on("click", () => {
+        Analyzer.trackUserClick(clientId);
+    });
 }
