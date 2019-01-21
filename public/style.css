@@ -1,0 +1,16 @@
+@font-face {
+    font-family: jack;
+    src: url(jack.ttf);
+  }
+
+body{
+    font-family: jack;
+    max-width: 75%;
+    margin: 0 auto;
+}
+
+@media(max-width: 768px){
+    body{
+        max-width: 90%;
+    }
+}
