@@ -3,7 +3,7 @@ import * as socket_io from "socket.io";
 
 import * as Analyzer from "./analyzer";
 
-var io: socket_io.Server = null;
+var io: socket_io.Server;
 
 export function initialize(server: Server) {
     io = socket_io(server);
@@ -12,7 +12,8 @@ export function initialize(server: Server) {
 
 function handleIncomingConnection(socket: socket_io.Socket) {
     let clientId = socket.client.id;
-    Analyzer.trackUserConnection(clientId);
+    let clientIP = socket.handshake.address;
+    Analyzer.trackUserConnection(clientId, clientIP);
     socket.on("click", () => {
         Analyzer.trackUserClick(clientId);
     });
