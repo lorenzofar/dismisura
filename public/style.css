@@ -2,10 +2,15 @@
     font-family: jack;
     src: url(jack.otf);
 }
+@font-face{
+    font-family: berthold;
+    src: url(berthold.ttf);
+}
 
 body{
     max-width: 75%;
     margin: 0 auto;
+    font-family: berthold;
 }
 
 /* ===== RANDOM CONTAINER ===== */
