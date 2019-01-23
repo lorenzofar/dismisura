@@ -7,6 +7,10 @@
     src: url(berthold.ttf);
 }
 
+:root{
+    --main-spacing: 12px;
+}
+
 body{
     max-width: 75%;
     margin: 0 auto;
@@ -23,10 +27,11 @@ body{
 #banner{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    margin: var(--main-spacing) 0px;
 }
 #banner > img{
     grid-column: 1/2;
-    max-height: 64px;
+    max-height: 32px;
     width: min-content;
 }
 #banner > span{
