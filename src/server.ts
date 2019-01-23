@@ -7,6 +7,7 @@ import * as compression from "compression"
 import * as cors from "cors";
 import * as favicon from "serve-favicon";
 
+import * as analyzer from "./analyzer";
 import * as socketManager from "./socketManager";
 
 /* Start express webserver and initialize websocket */
@@ -29,6 +30,8 @@ server.listen(PORT, () => console.log(`> server listening on port ${PORT}`));
 
 socketManager.initialize(server);
 
-function serveHomePage(req: express.Request, res: express.Response){
-    res.render("index", {});
+function serveHomePage(req: express.Request, res: express.Response) {
+    analyzer.getConnectionNumber((count, err) => {
+        res.render("index", { connectionCount: count });
+    });
 }
