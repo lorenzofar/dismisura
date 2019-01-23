@@ -19,6 +19,23 @@ body{
     font-family: jack;
 }
 
+/* ===== BANNER ===== */
+#banner{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+#banner > img{
+    grid-column: 1/2;
+    max-height: 64px;
+    width: min-content;
+}
+#banner > span{
+    grid-column: 2/3;
+    text-align: right;
+    align-self: center;
+    font-size: large;
+}
+
 /* ===== MAIN CONTAINER ===== */
 
 #main-container{
