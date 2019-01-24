@@ -16,5 +16,8 @@ function handleIncomingConnection(socket: socket_io.Socket) {
     Analyzer.trackUserConnection(clientId, clientIP);
     socket.on("click", () => {
         Analyzer.trackUserClick(clientId);
+        Analyzer.getClicksNumber((totalClicks, dailyClicks) => {
+            io.emit("click", { totalClicks, dailyClicks });
+        });
     });
 }

@@ -54,7 +54,7 @@ function getConnectionNumber(callback: (total: number, today: number, err: boole
         });
 }
 
-function getClicksNumber(callback: (total: number, today: number, err: boolean) => void) {
+export function getClicksNumber(callback: (total: number, today: number, err: boolean) => void) {
     dbClient("click")
         .select(
             dbClient.raw("COUNT(CASE WHEN True THEN userid ELSE NULL END) AS total"),
