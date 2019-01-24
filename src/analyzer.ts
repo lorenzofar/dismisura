@@ -1,6 +1,13 @@
 import dbClient from "./dbManager";
 import { IncomingHttpHeaders } from "http2";
 
+export interface Stats{
+    totalConnections: number;
+    dailyConnections: number;
+    totalClicks: number;
+    dailyClicks: number;
+}
+
 export function trackUserConnection(client: string, ip: string) {
     if (!client || client == "") return;
     let connection: { userid: string, ip: string } = {
@@ -29,7 +36,7 @@ export function trackUserClick(client: string) {
 }
 
 /* ===== CONNECTIONS STATS ===== */
-export function getConnectionNumber(callback: (total: number, today: number, err: boolean) => void) {
+function getConnectionNumber(callback: (total: number, today: number, err: boolean) => void) {
     // get data about total number of connections and for daily quota
     dbClient("connection")
         .select(
@@ -45,4 +52,35 @@ export function getConnectionNumber(callback: (total: number, today: number, err
             console.error(err);
             callback(0, 0, true);
         });
+}
+
+function getClicksNumber(callback: (total: number, today: number, err: boolean) => void) {
+    dbClient("click")
+        .select(
+            dbClient.raw("COUNT(CASE WHEN True THEN userid ELSE NULL END) AS total"),
+            dbClient.raw("COUNT(CASE WHEN DATE_TRUNC('day', timestamp)=DATE_TRUNC('day', CURRENT_TIMESTAMP) THEN userid ELSE NULL END) AS today")
+        )
+        .then(data => {
+            let totalClicks = data[0].total;
+            let dailyClicks = data[0].today;
+            callback(totalClicks, dailyClicks, false);
+        })
+        .catch((err) => {
+            console.error(err);
+            callback(0, 0, true);
+        });
+}
+
+export function getStats(callback: (stats: Stats)=>void){
+    getConnectionNumber((totalConn, dailyConn) => {
+        getClicksNumber((totalClicks, dailyClicks) => {
+            let data: Stats = {
+                totalConnections: totalConn,
+                dailyConnections: dailyConn,
+                totalClicks: totalClicks, 
+                dailyClicks: dailyClicks
+            }
+            callback(data);
+        }); 
+    });
 }

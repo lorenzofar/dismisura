@@ -31,7 +31,7 @@ server.listen(PORT, () => console.log(`> server listening on port ${PORT}`));
 socketManager.initialize(server);
 
 function serveHomePage(req: express.Request, res: express.Response) {
-    analyzer.getConnectionNumber((total, today, err) => {
-        res.render("index", { totalConnections: total, dailyConnections: today });
+    analyzer.getStats(stats => {
+        res.render("index", stats);
     });
 }
