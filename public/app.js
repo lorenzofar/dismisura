@@ -4,6 +4,8 @@ const randomContent = [];
 const TIME_LB = 750;
 const TIME_UP = 2500;
 
+const MAIN_CONTENT_WAIT = 2000;
+
 var mouseDistance = 0;
 var connectedCount = 0;
 
@@ -59,7 +61,9 @@ function buildUI() {
     let newTime = Math.random() * (TIME_UP, TIME_LB) + TIME_LB;
     randomContent.splice(index, 1);
     if (randomContent.length) setTimeout(buildUI, newTime);
-    else; // show main content
+    else setTimeout(() => {
+        $("#main-container").fadeIn("slow");
+    }, MAIN_CONTENT_WAIT);
 }
 
 /* DOM elements manager */
