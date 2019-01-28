@@ -32,6 +32,7 @@ body{
 /* ===== RANDOM CONTAINER ===== */
 
 #random-container{
+    grid-row: 1/2;
     font-family: jack;
 }
 
@@ -53,6 +54,8 @@ body{
 
 /* ===== MAIN CONTAINER ===== */
 #main-container{
+    display: none;
+    grid-row: 1/2;
     max-width: 60%;
     margin: 0 auto;
     margin-top: calc(var(--main-spacing) * 4);
