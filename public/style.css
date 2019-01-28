@@ -60,5 +60,10 @@ body{
 
 /* ===== RESPONSIVE HANDLERS ===== */
 @media(max-width: 768px){
-    
+    #banner{
+        flex-direction: column;
+    }
+    #banner > *:first-child{
+        margin-bottom: var(--main-spacing);
+    }
 }
