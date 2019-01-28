@@ -22,7 +22,7 @@ body{
 
 #container{
     grid-row: 1/2;
-    margin: var(--main-spacing);
+    margin: calc(var(--main-spacing) * 3);
 }
 
 /* ===== RANDOM CONTAINER ===== */
@@ -36,13 +36,15 @@ body{
     grid-row: 2/3;
     display: flex;
     justify-content: space-between;
-    margin: var(--main-spacing);
+    margin: calc(var(--main-spacing) * 3);
 }
 #banner > img{
     max-height: 32px;
+    align-self: center;
 }
 #banner > span{
-    font-size: large;
+    font-size: x-large;
+    align-self: center;
 }
 
 /* ===== MAIN CONTAINER ===== */
