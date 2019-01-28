@@ -24,6 +24,10 @@ body{
     grid-row: 1/2;
     margin: calc(var(--main-spacing) * 3);
 }
+#container > div{
+    font-size: 1.5em;
+}
+
 
 /* ===== RANDOM CONTAINER ===== */
 
@@ -48,9 +52,8 @@ body{
 }
 
 /* ===== MAIN CONTAINER ===== */
-
 #main-container{
-    max-width: 75%;
+    max-width: 60%;
     margin: 0 auto;
     margin-top: calc(var(--main-spacing) * 4);
 }
