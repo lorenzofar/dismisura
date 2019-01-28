@@ -47,7 +47,7 @@ window.addEventListener("click", function (event) {
 window.addEventListener("pointermove", function (event) {
     calculateDistance(event.movementX, event.movementY);
 });
-document.getElementById("container").addEventListener("wheel", handleScroll);
+window.addEventListener("wheel", handleScroll);
 
 function calculateDistance(deltax, deltay) {
     mouseDistance += Math.sqrt(Math.pow(deltax, 2) + Math.pow(deltay, 2));
