@@ -12,9 +12,17 @@
 }
 
 body{
-    max-width: 80%;
-    margin: var(--main-spacing) auto;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
     font-family: berthold;
+}
+
+#container{
+    grid-row: 1/2;
+    margin: var(--main-spacing);
 }
 
 /* ===== RANDOM CONTAINER ===== */
@@ -25,14 +33,13 @@ body{
 
 /* ===== BANNER ===== */
 #banner{
+    grid-row: 2/3;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: var(--main-spacing) 0px;
+    margin: var(--main-spacing);
 }
 #banner > img{
     grid-column: 1/2;
     max-height: 32px;
-    width: min-content;
 }
 #banner > span{
     grid-column: 2/3;
@@ -51,7 +58,5 @@ body{
 
 /* ===== RESPONSIVE HANDLERS ===== */
 @media(max-width: 768px){
-    body{
-        max-width: 90%;
-    }
+    
 }

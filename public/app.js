@@ -46,7 +46,8 @@ window.addEventListener("click", function (event) {
 });
 window.addEventListener("pointermove", function (event) {
     calculateDistance(event.movementX, event.movementY);
-})
+});
+document.getElementById("container").addEventListener("wheel", handleScroll);
 
 function calculateDistance(deltax, deltay) {
     mouseDistance += Math.sqrt(Math.pow(deltax, 2) + Math.pow(deltay, 2));
@@ -61,9 +62,19 @@ function buildUI() {
     let newTime = Math.random() * (TIME_UP, TIME_LB) + TIME_LB;
     randomContent.splice(index, 1);
     if (randomContent.length) setTimeout(buildUI, newTime);
-    else setTimeout(() => {
-        $("#main-container").fadeIn("slow");
-    }, MAIN_CONTENT_WAIT);
+}
+
+function handleScroll(e) {
+    if (randomContent.length) return;
+
+    if (e.deltaY > 0 && $("#main-container").is(":hidden")) {
+        $("#random-container").hide();
+        $("#main-container").fadeIn("fast");
+    }
+    else if (e.deltaY < 0 && $("#random-container").is(":hidden")) {
+        $("#main-container").hide();
+        $("#random-container").fadeIn("slow");
+    }
 }
 
 /* DOM elements manager */
