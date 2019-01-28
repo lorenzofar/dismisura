@@ -34,17 +34,14 @@ body{
 /* ===== BANNER ===== */
 #banner{
     grid-row: 2/3;
-    display: grid;
+    display: flex;
+    justify-content: space-between;
     margin: var(--main-spacing);
 }
 #banner > img{
-    grid-column: 1/2;
     max-height: 32px;
 }
 #banner > span{
-    grid-column: 2/3;
-    text-align: right;
-    align-self: center;
     font-size: large;
 }
 
