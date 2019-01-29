@@ -1,12 +1,18 @@
 import dbClient from "./dbManager";
 import { IncomingHttpHeaders } from "http2";
 
-export interface Stats{
+export interface Stats {
     totalConnections: number;
     dailyConnections: number;
     totalClicks: number;
     dailyClicks: number;
 }
+
+interface TimeTracker {
+    [client: string]: number;
+}
+
+var time: TimeTracker = {};
 
 export function trackUserConnection(client: string, ip: string) {
     if (!client || client == "") return;
@@ -16,10 +22,27 @@ export function trackUserConnection(client: string, ip: string) {
     }
     dbClient("connection").insert(connection)
         .then(result => {
+            time[client] = 0;
         })
         .catch(err => {
             console.error(err);
         });
+}
+
+export function trackUserDisconnection(client: string) {
+    if (!client || client == "" || !(client in time)) return;
+    console.log(`${client} disconnected`);
+    dbClient("connection")
+        .where({ userid: client }).
+        update({ time: time[client] })
+        .then(() => {
+        })
+        .catch(err => {
+            console.error(err);
+        })
+        .finally(() => {
+            delete time[client];
+        })
 }
 
 export function trackUserClick(client: string) {
@@ -77,10 +100,16 @@ export function getStats(callback: (stats: Stats)=>void){
             let data: Stats = {
                 totalConnections: totalConn,
                 dailyConnections: dailyConn,
-                totalClicks: totalClicks, 
+                totalClicks: totalClicks,
                 dailyClicks: dailyClicks
             }
             callback(data);
-        }); 
+        });
     });
 }
+
+function trackerTick() {
+    Object.keys(time).forEach(client => time[client]++);
+}
+
+setInterval(trackerTick, 1000);

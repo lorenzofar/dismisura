@@ -15,6 +15,7 @@ function handleIncomingConnection(socket: socket_io.Socket) {
     let clientIP = socket.handshake.address;
     Analyzer.trackUserConnection(clientId, clientIP);
     io.emit("userconnected", Object.keys(io.clients().connected).length);
+    socket.on("disconnect", Analyzer.trackUserDisconnection.bind(null, clientId));
     socket.on("click", () => {
         Analyzer.trackUserClick(clientId);
         Analyzer.getClicksNumber((totalClicks, dailyClicks) => {
