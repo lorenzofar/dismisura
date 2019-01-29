@@ -54,8 +54,8 @@ function calculateDistance(deltax, deltay) {
     updateElementValue("distance-counter", Math.round(mouseDistance));
 }
 
-function buildUI() {
-    let index = Math.floor(Math.random() * (randomContent.length - 1));
+function buildUI(firstStart) {
+    let index = firstStart ? 0 : Math.floor(Math.random() * (randomContent.length - 1));
     let element = randomContent[index];
     $(element[0]).hide().appendTo("#random-container").fadeIn("slow");
     if (element[1]) element[1]();
@@ -86,5 +86,5 @@ function updateElementValue(elementId, value) {
 }
 
 window.onload = () => {
-    setTimeout(buildUI, Math.random() * (TIME_UP - TIME_LB) + TIME_LB);
+    setTimeout(buildUI.bind(this, true), Math.random() * (TIME_UP - TIME_LB) + TIME_LB);
 };
