@@ -18,6 +18,7 @@ body{
     height: 100vh;
     margin: 0px;
     font-family: berthold;
+    overflow: hidden;
 }
 
 body > div{
@@ -33,6 +34,7 @@ body > div{
 
 #random-container{
     font-family: jack;
+    overflow-y: auto;
 }
 
 /* ===== BANNER ===== */
