@@ -1,5 +1,5 @@
 import dbClient from "./dbManager";
-import { IncomingHttpHeaders } from "http2";
+import * as socketManager from "./socketManager";
 
 export interface Stats {
     totalConnections: number;
@@ -14,6 +14,8 @@ interface TimeTracker {
 }
 
 var time: TimeTracker = {};
+
+var cachedTimeCount = 0;
 
 export function trackUserConnection(client: string, ip: string) {
     if (!client || client == "") return;
@@ -42,6 +44,8 @@ export function trackUserDisconnection(client: string) {
             console.error(err);
         })
         .finally(() => {
+            cachedTimeCount += time[client];
+            updateSpentTime();
             delete time[client];
         })
 }
@@ -60,10 +64,10 @@ export function trackUserClick(client: string) {
 }
 
 /* ===== CONNECTIONS STATS ===== */
-function getConnectionNumber(callback: (total: number, today: number, time: number,  err: boolean) => void) {
+function getConnectionNumber(callback: (total: number, today: number, time: number, err: boolean) => void) {
     // get data about total number of connections and for daily quota
     dbClient("connection")
-        .select(            
+        .select(
             dbClient.raw("SUM(time) AS totalTime"),
             dbClient.raw("COUNT(CASE WHEN True THEN userid ELSE NULL END) AS total"),
             dbClient.raw("COUNT(CASE WHEN DATE_TRUNC('day', timestamp)=DATE_TRUNC('day', CURRENT_TIMESTAMP) THEN userid ELSE NULL END) AS today")
@@ -72,6 +76,7 @@ function getConnectionNumber(callback: (total: number, today: number, time: numb
             let totalConnections = data[0].total;
             let dailyConnections = data[0].today;
             let totalTime = data[0].totaltime;
+            cachedTimeCount = parseInt(totalTime); // update the cache
             callback(totalConnections, dailyConnections, totalTime, false);
         })
         .catch((err) => {
@@ -113,7 +118,19 @@ export function getStats(callback: (stats: Stats) => void) {
 }
 
 function trackerTick() {
-    Object.keys(time).forEach(client => time[client]++);
+    Object.keys(time).forEach(client => {
+        time[client]++;
+    });
+    updateSpentTime();
+}
+
+function updateSpentTime() {
+    let tempSum = 0;
+    Object.keys(time).forEach(client => {
+        tempSum += time[client];
+    });
+    socketManager.emitTimeUpdate(tempSum + cachedTimeCount);
 }
 
 setInterval(trackerTick, 1000);
+dbClient("connection").sum("time").then(data => cachedTimeCount = parseInt(data[0].sum));

@@ -42,6 +42,10 @@ socket.on("click", (data) => {
 socket.on("userconnected", (connectedUsers) => {
     connectedCount = connectedUsers;
     updateElementValue("connected-users-counter", connectedCount);
+});
+
+socket.on("time", (time) => {
+    updateElementValue("spent-time-counter", time);
 })
 
 /* EVENT LISTENERS */

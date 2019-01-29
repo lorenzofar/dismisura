@@ -10,6 +10,10 @@ export function initialize(server: Server) {
     io.on("connection", handleIncomingConnection);
 }
 
+export function emitTimeUpdate(time: number) {
+    io.emit("time", time);
+}
+
 function handleIncomingConnection(socket: socket_io.Socket) {
     let clientId = socket.client.id;
     let clientIP = socket.handshake.address;
