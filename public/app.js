@@ -7,7 +7,6 @@ const TIME_UP = 2500;
 const MAIN_CONTENT_WAIT = 2000;
 
 const ALIGNMENTS = ["left", "center", "right"];
-const FONTSIZES = ["1.5vh", "2vh", "2.5vh", "3vh", "3.5vh", "1vw", "2vw", "3vw"];
 
 var mouseDistance = 0;
 var connectedCount = 0;
@@ -77,18 +76,13 @@ function buildUI(firstStart) {
     do {
         alignment = ALIGNMENTS[Math.floor(Math.random() * (ALIGNMENTS.length - 1))];
     } while (alignment == previousAlign);
-    do {
-        fontSize = FONTSIZES[Math.floor(Math.random() * (FONTSIZES.length - 1))];
-    } while (fontSize == previousSize);
     previousAlign = alignment;
-    previousSize = fontSize;
 
     // increase entropy
     ALIGNMENTS.reverse();
-    FONTSIZES.reverse();
 
     $(element[0]).hide().appendTo("#random-container").fadeIn("slow")
-        .css({ "text-align": alignment, "font-size": fontSize });;
+        .css({ "text-align": alignment});;
     if (element[1]) element[1]();
     let newTime = Math.random() * (TIME_UP, TIME_LB) + TIME_LB;
     randomContent.splice(index, 1);
