@@ -30,7 +30,7 @@ randomContent.push(["<div> ora ci sono <span id='connected-users-counter'/> pers
         updateElementValue("connected-users-counter", connectedCount);
     }
 ]);
-randomContent.push(["<div> su questa pagina sono stati trascorsi <span id='spent-time-counter'/> secondi </div>",
+randomContent.push(["<div> su questa pagina sono stati trascorsi  in totale <span id='spent-time-counter'/> secondi </div>",
     () => {
         updateElementValue("spent-time-counter", totalTime);
     }
