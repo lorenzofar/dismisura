@@ -13,7 +13,7 @@ var connectedCount = 0;
 
 /* JACK'S GIBBERISH */
 randomContent.push(["<div>ciao, io sono Jack</div>", null]);
-
+randomContent.push(["<div>Jack vuole avere tutto sotto controllo</div>", null]);
 /* DATA */
 randomContent.push(["<div>hai percorso <span id='distance-counter'/> pixel</div>",
     () => {
@@ -67,8 +67,8 @@ function calculateDistance(deltax, deltay) {
 var previousAlign;
 var previousSize;
 
-function buildUI(firstStart) {
-    let index = firstStart ? 0 : Math.floor(Math.random() * (randomContent.length - 1));
+function buildUI(hitCount) {
+    let index = hitCount > 0 ? 0 : Math.floor(Math.random() * (randomContent.length - 1));
     let element = randomContent[index];
     let alignment;
     let fontSize
@@ -82,11 +82,12 @@ function buildUI(firstStart) {
     ALIGNMENTS.reverse();
 
     $(element[0]).hide().appendTo("#random-container").fadeIn("slow")
-        .css({ "text-align": alignment});;
+        .css({ "text-align": alignment });;
     if (element[1]) element[1]();
     let newTime = Math.random() * (TIME_UP, TIME_LB) + TIME_LB;
     randomContent.splice(index, 1);
-    if (randomContent.length) setTimeout(buildUI, newTime);
+    hitCount--;
+    if (randomContent.length) setTimeout(buildUI.bind(this, hitCount), newTime);
 }
 
 function handleScroll(e) {
@@ -111,5 +112,5 @@ function updateElementValue(elementId, value) {
 }
 
 window.onload = () => {
-    setTimeout(buildUI.bind(this, true), Math.random() * (TIME_UP - TIME_LB) + TIME_LB);
+    setTimeout(buildUI.bind(this, 2), Math.random() * (TIME_UP - TIME_LB) + TIME_LB);
 };
