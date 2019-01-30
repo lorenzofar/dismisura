@@ -12,8 +12,6 @@
 }
 
 body{
-    display: grid;
-    grid-template-rows: 1fr auto;
     width: 100vw;
     height: 100vh;
     margin: 0px;
@@ -22,10 +20,7 @@ body{
 }
 
 body > div{
-    grid-row: 1/2;
-    margin: calc(var(--main-spacing) * 3);
-}
-body > div{
+    padding: calc(var(--main-spacing) * 3);
     font-size: 1.5em;
 }
 
@@ -35,14 +30,22 @@ body > div{
 #random-container{
     font-family: jack;
     overflow-y: auto;
+    max-height: 80vh;
+}
+
+#random-container > div{
+    margin: var(--main-spacing) 0;
 }
 
 /* ===== BANNER ===== */
 #banner{
-    grid-row: 2/3;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: space-between;
-    margin: calc(var(--main-spacing) * 3);
+    background-color: white;    
 }
 #banner > img{
     max-height: 32px;
