@@ -38,6 +38,7 @@
     "@types/express": "^4.16.0",
     "@types/node": "^10.12.18",
     "@types/serve-favicon": "^2.2.30",
-    "@types/socket.io": "^2.1.2"
+    "@types/socket.io": "^2.1.2",
+    "typescript": "^3.2.4"
   }
 }
