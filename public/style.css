@@ -67,6 +67,9 @@ body > div{
 
 /* ===== RESPONSIVE HANDLERS ===== */
 @media(max-width: 768px){
+    #random-container{
+        font-size: 2vh;
+    }
     #banner{
         flex-direction: column;
     }
