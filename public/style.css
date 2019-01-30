@@ -69,4 +69,7 @@ body > div{
     #banner > *:first-child{
         margin-bottom: var(--main-spacing);
     }
+    #banner > span{
+        font-size: 4vw;
+    }
 }
