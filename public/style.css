@@ -35,7 +35,6 @@ body > div{
 
 #random-container > div{
     margin: var(--main-spacing) 0;
-    display: none !important; 
 }
 
 /* ===== BANNER ===== */
