@@ -35,6 +35,7 @@ body > div{
 
 #random-container > div{
     margin: var(--main-spacing) 0;
+    display: none !important; 
 }
 
 /* ===== BANNER ===== */
@@ -63,6 +64,15 @@ body > div{
     margin: 0 auto;
     margin-top: calc(var(--main-spacing) * 4);
     line-height: 1.2em;
+}
+
+/* ===== SCROLL ICON ===== */
+#scroll-icon{
+    text-align: center;
+}
+#scroll-icon > img{
+    max-width: 48px;
+    cursor: pointer;
 }
 
 /* ===== RESPONSIVE HANDLERS ===== */
