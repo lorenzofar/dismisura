@@ -21,12 +21,12 @@ html
             br
             | È tutto sotto controllo.
         
-        #scroll-icon
-            img(src="down.svg" onclick="handleScroll({deltaY: 1})")
-
-        #banner
-            img#logo(src="/logo.svg")
-            span BASE Milano 18–19 marzo 2019
+        #banner-container
+            #scroll-icon
+                img(src="down.svg" onclick="handleScroll({deltaY: 1})")
+            #banner
+                img#logo(src="/logo.svg")
+                span BASE Milano 18–19 marzo 2019
 
         script.
             totalConnections="#{totalConnections}"
