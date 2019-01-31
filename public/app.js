@@ -95,10 +95,14 @@ function handleScroll(e) {
 
     if (e.deltaY > 0 && $("#main-container").is(":hidden")) {
         $("#random-container").hide();
+        $("#scroll-icon > img").attr("src", "up.svg");
+        $("#scroll-icon > img").attr("onclick", "handleScroll({deltaY: -1})");
         $("#main-container").fadeIn("fast");
     }
     else if (e.deltaY < 0 && $("#random-container").is(":hidden")) {
         $("#main-container").hide();
+        $("#scroll-icon > img").attr("src", "down.svg");
+        $("#scroll-icon > img").attr("onclick", "handleScroll({deltaY: 1})");
         $("#random-container").fadeIn("slow");
     }
 }
