@@ -12,6 +12,8 @@
 }
 
 body{
+    display: grid;
+    grid-template-rows: 1fr auto;
     width: 100vw;
     height: 100vh;
     margin: 0px;
@@ -28,9 +30,9 @@ body > div{
 /* ===== RANDOM CONTAINER ===== */
 
 #random-container{
+    grid-row: 1/2;
     font-family: jack;
     overflow-y: auto;
-    max-height: 80vh;
 }
 
 #random-container > div{
@@ -39,12 +41,10 @@ body > div{
 
 /* ===== BANNER ===== */
 #banner-container{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    grid-row: 2/3;
     display: flex;
     flex-direction: column;
+    padding-top: 0px;
 }
 
 #banner{
@@ -63,11 +63,13 @@ body > div{
 
 /* ===== MAIN CONTAINER ===== */
 #main-container{
+    grid-row: 1/2;
     display: none;
     max-width: 60%;
     margin: 0 auto;
     margin-top: calc(var(--main-spacing) * 4);
     line-height: 1.2em;
+    overflow-y: auto;
 }
 
 /* ===== SCROLL ICON ===== */
